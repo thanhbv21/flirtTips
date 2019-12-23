@@ -1,9 +1,17 @@
 import { UPDATE_POSTS } from '../actions/types';
 
-const post = (state = [], action) => {
+const INITIAL_STATE = {
+    postList: [],
+  };
+
+const post = (state = INITIAL_STATE, action) => {
     switch (action.type) {
       case UPDATE_POSTS:
-        return action.posts;
+        const { posts } = action;
+        return {
+            ...state,
+            postList: posts
+        };
       default:
         return state
     }
