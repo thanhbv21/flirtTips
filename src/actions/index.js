@@ -1,3 +1,7 @@
 export {
     getPosts,
-} from './home';
+} from './post';
+
+export {
+    getFeaturedImage
+} from './media';

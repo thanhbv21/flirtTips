@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-    List,
-    ListItem,
-} from '@ui-kitten/components';
+import Posts from '../components/Posts';
 import { connect } from 'react-redux';
 import { getPosts } from '../actions';
 
@@ -16,14 +13,9 @@ class Home extends React.PureComponent {
 
     render() {
         const { posts } = this.props;
-        const renderItem = ({ item }) => (
-            <ListItem title={`${item.title.rendered}`} 
-            description={`${item.excerpt.rendered}`} />
-        );
         return (
-            <List
+            <Posts
                 data={posts}
-                renderItem={renderItem}
             />
         );
     }
