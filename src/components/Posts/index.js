@@ -12,7 +12,7 @@ class Posts extends React.Component {
         refreshing: false
     }
     render() {
-        const { data } = this.props;
+        const { data, refreshCb } = this.props;
         return (
             <List
                 data={data}
@@ -26,9 +26,7 @@ class Posts extends React.Component {
                     );
                 }}
                 refreshing={this.state.refreshing}
-                onRefresh={() => {
-                    // console.log(23423);
-                }}
+                onRefresh={refreshCb}
             />
         );
     }

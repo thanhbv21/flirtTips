@@ -2,6 +2,7 @@ import { UPDATE_MEDIA } from '../actions/types';
 
 const INITIAL_STATE = {
     mediaList: [],
+    mediaListModified: 0
   };
 
 const post = (state = INITIAL_STATE, action) => {
@@ -10,9 +11,11 @@ const post = (state = INITIAL_STATE, action) => {
         const { media } = action;
         const { mediaList } = state;
         mediaList[media.id] = media;
+        const currTmp = Date.parse(new Date()); 
         return {
             ...state,
-            mediaList: mediaList
+            mediaList: mediaList,
+            mediaListModified: currTmp
         };
       default:
         return state

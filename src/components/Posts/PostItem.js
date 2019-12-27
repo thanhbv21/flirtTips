@@ -24,6 +24,9 @@ const propTypes = {
   
 
 class PostItem extends React.PureComponent {
+    state = {
+        featuredImage: ''
+    }
 
     componentDidMount() {
         const { featured, onGetFeatured } = this.props;
@@ -32,10 +35,21 @@ class PostItem extends React.PureComponent {
         }
     }
 
+    static getDerivedStateFromProps(props, state) {
+        if(state.featuredImage === '') {
+            if(props.media.mediaList.length > 0 && props.media.mediaList[props.featured]) {
+                return {
+                    featuredImage: props.media.mediaList[props.featured].source_url
+                }
+            } 
+        }
+        return null;
+    }
+
     render() {
-        const { title, excerpt, featured, mediaList } = this.props;
-        const src = mediaList[featured] ? mediaList[featured].media_details.sizes['post-thumbnail'].source_url : 'https://img3.thuthuatphanmem.vn/uploads/2019/09/30/anh-background-giot-nuoc_111421147.jpg';
-        console.log(src);
+        const { title, excerpt } = this.props;
+        const { featuredImage } = this.state;
+        const src = featuredImage === '' ? 'https://img3.thuthuatphanmem.vn/uploads/2019/09/30/anh-background-giot-nuoc_111421147.jpg' : featuredImage;
         return (
             <TouchableOpacity
                 activeOpacity={0.9}
@@ -82,7 +96,7 @@ PostItem.propTypes = propTypes;
 PostItem.defaultProps = defaultProps;
 
 const mapStateToProps = state => ({
-    mediaList: state.media.mediaList
+    media: state.media,
 });
 
 const mapDispatchToProps = dispatch => ({

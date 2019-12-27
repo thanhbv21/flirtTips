@@ -12,10 +12,11 @@ class Home extends React.PureComponent {
     }
 
     render() {
-        const { posts } = this.props;
+        const { posts, onGetPosts } = this.props;
         return (
             <Posts
                 data={posts}
+                refreshCb={onGetPosts}
             />
         );
     }
